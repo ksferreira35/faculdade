@@ -58,7 +58,7 @@ Senha gerada: A8#jLp1!xZq@
 ## 🛠 Estrutura do Projeto
 
 ```
-PasswordGenerator/
+projeto-bootcamp/
 ├── PasswordGenerator.java
 └── README.md
 ```
