@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>Clinica Viva Bem</title>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <img src="/picture/logo.jpg" alt="Silver Clinic" class="logo">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="contato.html">Contato</a></li>
+                <li><a href="#">Novidades</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <div class="content-container">
+            <section>
+                <h1>Entre em Contato</h1>
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="nome">Nome:</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefone">Telefone:</label>
+                        <input type="text" id="telefone" name="telefone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem:</label>
+                        <textarea name="mensagem" id="mensagem" rows="5" required></textarea>
+                    </div>
+
+                    <button type="submit">Enviar</button>
+                </form>
+
+                <div id="form-result" class="form-result">
+
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <footer>
+        <span>
+            Todos os direitos reservados &copy; Silver Clinic 2025
+        </span>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
