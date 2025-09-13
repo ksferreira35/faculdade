@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Currículo Online</title>
+    <style>
+        :root {
+            --bg: #121212;
+            --text: #f5f5f5;
+            --muted: #cccccc;
+            --card: #1c1c1c;
+            --card-contrast: #0f0f0f;
+            --accent: #1db954;
+            --accent2: #00ff95;
+            --border: #1db95455;
+        }
+
+        .theme-light {
+            --bg: #f7f7f7;
+            --text: #1a1a1a;
+            --muted: #606060;
+            --card: #ffffff;
+            --card-contrast: #f2f2f2;
+            --accent: #15803d;
+            --accent2: #0f9d58;
+            --border: #15803d33;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: Arial, sans-serif;
+            transition: background .2s ease, color .2s ease;
+        }
+
+        .pagina {
+            background: var(--card);
+            max-width: 800px;
+            margin: 40px auto;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, .5);
+            overflow: hidden;
+            position: relative;
+            transition: background .2s ease;
+        }
+
+        .conteudo {
+            padding: 30px
+        }
+
+        h1,
+        h2 {
+            color: var(--accent);
+            margin: 0 0 5px
+        }
+
+        h1 {
+            margin-top: 5px
+        }
+
+        a {
+            color: var(--accent2);
+            text-decoration: none
+        }
+
+        a:hover {
+            text-decoration: underline
+        }
+
+        header img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid var(--accent);
+            margin-bottom: 5px;
+            transition: border-color .2s ease;
+        }
+
+        header p {
+            margin: 0;
+            color: var(--muted)
+        }
+
+        hr.div {
+            border: 0;
+            border-top: 1px solid var(--border);
+            margin: 20px 0;
+            width: 100%;
+        }
+
+        p {
+            margin: 4px 0
+        }
+
+        .formacao .linha {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 12px;
+            margin: 0 0 2px;
+        }
+
+        .local {
+            text-align: right;
+            color: var(--muted)
+        }
+
+        .ano {
+            text-align: right;
+            color: var(--accent);
+            font-weight: bold;
+            text-transform: uppercase
+        }
+
+        .habilidades {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .habilidades span {
+            padding: 6px 14px;
+            border: 1px solid var(--accent);
+            border-radius: 12px;
+            color: var(--text);
+            font-size: 14px;
+            transition: .2s ease background, .2s ease color, .2s ease border-color;
+        }
+
+        .theme-light .habilidades span {
+            background: #f5fbf7
+        }
+
+        .habilidades span:hover {
+            background: color-mix(in oklab, var(--accent) 12%, transparent);
+            cursor: default;
+        }
+
+        .theme-light .habilidades span:hover {
+            background: #e9f6ef
+        }
+
+        .email {
+            color: var(--accent2)
+        }
+
+        .footer-bleed {
+            background: var(--card-contrast);
+            color: var(--muted);
+            text-align: center;
+            padding: 12px 30px;
+            border-top: 1px solid var(--border);
+            font-size: 14px;
+            font-style: italic;
+            transition: background .2s ease, color .2s ease, border-color .2s ease;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 999px;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            background: var(--card-contrast);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .35);
+            transition: transform .15s ease, background .2s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-1px)
+        }
+
+        .theme-toggle svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--accent)
+        }
+
+        .theme-toggle:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px
+        }
+
+        #btnTopo {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent);
+            color: var(--bg);
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            font-size: 20px;
+            cursor: pointer;
+            display: none;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+            transition: background .2s ease;
+        }
+
+        #btnTopo:hover {
+            background: var(--accent2)
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                color: #000
+            }
+
+            .pagina {
+                box-shadow: none;
+                border-radius: 0;
+                margin: 0;
+                max-width: none
+            }
+
+            .theme-toggle,
+            #btnTopo {
+                display: none !important
+            }
+
+            a {
+                color: #000;
+                text-decoration: underline
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="pagina">
+        <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+            <svg id="iconMoon" viewBox="0 0 24 24">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 1 0 9.79 9.79z" />
+            </svg>
+            <svg id="iconSun" viewBox="0 0 24 24" style="display:none">
+                <path
+                    d="M12 4V2m0 20v-2M4 12H2m20 0h-2M5.64 5.64 4.22 4.22m15.56 15.56-1.42-1.42M18.36 5.64l1.42-1.42M4.22 19.78l1.42-1.42M12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8z" />
+            </svg>
+        </button>
+
+        <div class="conteudo">
+            <header>
+                <div style="text-align:center;">
+                    <img src="https://avatars.githubusercontent.com/u/193942825?v=4.png" alt="Foto de Perfil">
+                    <h1>KAIKY SOARES FERREIRA</h1>
+                    <p>Estudante de Ciência da Computação | Brasília - DF</p>
+                </div>
+            </header>
+
+            <main>
+                <section class="contato">
+                    <hr class="div">
+                    <h2>Contato</h2>
+                    <p>Email: <span class="email">ksferreira35@gmail.com</span></p>
+                    <p>LinkedIn: <a href="https://www.linkedin.com/in/ksferreira35/"
+                            target="_blank">linkedin.com/in/ksferreira35</a></p>
+                    <p>GitHub: <a href="https://github.com/ksferreira35" target="_blank">github.com/ksferreira35</a></p>
+                </section>
+
+                <section>
+                    <hr class="div">
+                    <h2>Sobre Mim</h2>
+                    <p>Meu interesse por tecnologia começou cedo, inspirado pelo meu irmão na Red Hat. Portanto, aos 15
+                        anos,
+                        descobri o Linux e adotei o Fedora como meu sistema principal, tornando-se uma das minhas
+                        maiores paixões.
+                        Atualmente curso Ciência da Computação e me dedico também de forma autodidata, com certificações
+                        em Linux,
+                        Java, Python, Git e entre outras. Sou curioso, gosto de explorar sistemas em profundidade,
+                        testar soluções e
+                        resolver problemas enquanto aprendo continuamente.</p>
+                </section>
+
+                <section>
+                    <hr class="div">
+                    <h2>Formação Acadêmica</h2>
+                    <div class="formacao">
+                        <div class="linha">
+                            <p><strong>Centro Universitário de Brasília – <a href="https://www.uniceub.br/"
+                                        target="_blank">CEUB</a></strong></p>
+                            <p class="local">Brasília, DF</p>
+                        </div>
+                        <div class="linha">
+                            <p><em>Ciência da Computação – Em andamento</em></p>
+                            <p class="ano">2025 – Atual</p>
+                        </div>
+                    </div>
+                    <ul>
+                        <li>Programação com Python – estruturas de controle, funções e fundamentos de lógica</li>
+                        <li>Arquitetura de computadores – estudo dos componentes, funcionamento e organização do
+                            hardware</li>
+                        <li>Git e controle de versão – uso de repositórios, branches e colaboração em projetos</li>
+                        <li>Banco de dados – modelagem, normalização e consultas SQL</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <hr class="div">
+                    <h2>Projetos Acadêmicos</h2>
+                    <ul>
+                        <li><strong>Sistema de Gerenciamento de Hotel</strong> – projeto acadêmico usando teoria dos
+                            conjuntos e lógica matemática.</li>
+                        <li><strong>API de Registro de Óbitos</strong> – desenvolvida em Spring Boot.</li>
+                        <li><strong>Automação de Consulta</strong> – scripts Python para automação de consultas e
+                            extração de dados.</li>
+                    </ul>
+                    <p style="margin-top:10px; color:var(--muted);"><em>Entre outros projetos . . .</em></p>
+                </section>
+
+                <section>
+                    <hr class="div">
+                    <h2>Cursos e Certificados</h2>
+                    <div class="formacao">
+                        <div class="linha">
+                            <p><strong>Curso de Linux (40h) – <a href="https://www.cursoemvideo.com/"
+                                        target="_blank">Curso em Vídeo</a></strong></p>
+                            <p class="local">Brasília, DF</p>
+                        </div>
+                        <div class="linha">
+                            <p><em>Linux Essentials</em></p>
+                            <p class="ano">2025</p>
+                        </div>
+                    </div>
+                    <ul>
+                        <li>Fundamentos de diretórios e navegação</li>
+                        <li>Manipulação de arquivos e permissões</li>
+                        <li>Processos, usuários e pacotes</li>
+                    </ul>
+
+                    <div class="formacao">
+                        <div class="linha">
+                            <p><strong>Curso de Java Intermediário – <a href="https://www.sololearn.com/"
+                                        target="_blank">SoloLearn</a></strong></p>
+                            <p class="local">Brasília, DF</p>
+                        </div>
+                        <div class="linha">
+                            <p><em>Programação Orientada a Objetos</em></p>
+                            <p class="ano">2025</p>
+                        </div>
+                    </div>
+                    <ul>
+                        <li>Classes, objetos e encapsulamento</li>
+                        <li>Herança, polimorfismo e boas práticas</li>
+                        <li>Estruturas de dados básicas em Java</li>
+                    </ul>
+
+                    <div class="formacao">
+                        <div class="linha">
+                            <p><strong>Curso de Python – <a href="https://www.cursoemvideo.com/" target="_blank">Curso
+                                        em Vídeo</a></strong></p>
+                            <p class="local">Brasília, DF</p>
+                        </div>
+                        <div class="linha">
+                            <p><em>Fundamentos da Linguagem</em></p>
+                            <p class="ano">2025</p>
+                        </div>
+                    </div>
+                    <ul>
+                        <li>Estruturas condicionais e de repetição</li>
+                        <li>Manipulação de listas, dicionários e tuplas</li>
+                        <li>Funções e modularização de projetos</li>
+                    </ul>
+
+                    <div class="formacao">
+                        <div class="linha">
+                            <p><strong>Curso de Git e GitHub – <a href="https://www.cursoemvideo.com/"
+                                        target="_blank">Curso em Vídeo</a></strong></p>
+                            <p class="local">Brasília, DF</p>
+                        </div>
+                        <div class="linha">
+                            <p><em>Controle de Versão</em></p>
+                            <p class="ano">2025</p>
+                        </div>
+                    </div>
+                    <ul>
+                        <li>Versionamento de código com Git</li>
+                        <li>Uso de branches e merges</li>
+                        <li>Colaboração com repositórios remotos</li>
+                    </ul>
+
+                    <p style="margin-top:10px; color:var(--muted);"><em>Entre outros cursos na área de tecnologia . . .</em></p>
+                </section>
+
+                <section>
+                    <hr class="div">
+                    <h2>Habilidades</h2>
+                    <div class="habilidades">
+                        <span>Linux</span><span>Java</span><span>Python</span><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Git</span>
+                        <span>SQL</span><span>REST APIs</span><span>POO</span>
+                    </div>
+                </section>
+
+                <section>
+                    <hr class="div">
+                    <h2>Idiomas</h2>
+                    <ul>
+                        <li>Português – Nativo</li>
+                        <li>Inglês – Avançado</li>
+                    </ul>
+                </section>
+            </main>
+        </div>
+
+        <footer class="footer-bleed">
+            Última atualização: Setembro/2025
+        </footer>
+    </div>
+
+    <button id="btnTopo" onclick="window.scrollTo({top:0, behavior:'smooth'})">⬆</button>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('btnTopo');
+            const y = document.documentElement.scrollTop || document.body.scrollTop;
+            btn.style.display = y > 200 ? 'block' : 'none';
+        });
+        (function initTheme() {
+            const saved = localStorage.getItem('theme');
+            const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+            if (saved === 'light' || (!saved && prefersLight)) document.body.classList.add('theme-light');
+            updateIcons();
+        })();
+        function updateIcons() {
+            const light = document.body.classList.contains('theme-light');
+            document.getElementById('iconSun').style.display = light ? 'block' : 'none';
+            document.getElementById('iconMoon').style.display = light ? 'none' : 'block';
+        }
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            document.body.classList.toggle('theme-light');
+            localStorage.setItem('theme', document.body.classList.contains('theme-light') ? 'light' : 'dark');
+            updateIcons();
+        });
+    </script>
+</body>
+
+</html>
