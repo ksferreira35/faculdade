@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang='pt-br'>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Faixa etária</title> 
+
+</head>
+
+<body>
+    <h1>Faixa etária😎</h1><hr>
+
+    Idade: <input type="number" id="num">
+    <button onclick='processar()'>Verificar</button>
+
+</body>
+</html>
+
+<script>
+    function processar(){
+        idade = parseInt(document.getElementById('num').value);
+
+        if (idade >= 18 && idade <= 65) {
+            alert('Dentro da faixa etária')
+        } else {
+            alert('Fora da faixa etária')
+        }
+    }
+</script>

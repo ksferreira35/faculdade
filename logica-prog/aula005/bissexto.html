@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang='pt-br'>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ano bissexto</title> 
+
+</head>
+
+<body>
+    <h1>Analisador de ano bissexto😎</h1><hr>
+
+    Ano: <input type="number" id="num">
+    <button onclick='processar()'>Verificar</button>
+
+</body>
+</html>
+
+<script>
+    function processar(){
+        ano = parseInt(document.getElementById('num').value);
+
+        if (ano % 4 == 0 && ano % 100 != 0 || ano % 400 == 0) {
+            alert('Bissexto')
+        } else {
+            alert('Não é bissexto')
+        }
+    }
+</script>
