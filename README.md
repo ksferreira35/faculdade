@@ -79,6 +79,7 @@ Atualmente inclui:
 
 * ROT13
 * cifra de Vigenère
+* quebra da Cifra de Vigenère
 
 Localização:
 
