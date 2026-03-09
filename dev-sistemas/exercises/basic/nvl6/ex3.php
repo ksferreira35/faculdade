@@ -10,5 +10,4 @@ foreach ($produtos as $produto => $preco) {
     echo "Produto: $produto - Preço $preco <br>";
 }
 
-TESTE
 ?>
