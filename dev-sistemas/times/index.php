@@ -17,12 +17,22 @@
     <h2 class="mb-3">Lista de Times</h2>
 
     <table class="table table-bordered table-striped">
+
+        <form method="get" action="inserir.php">
+            Nome: <input type="text" name="nome">
+            Quantidade de Títulos: <input type="number" name="qtdTitulos">
+            <input type="submit" value="Salvar">
+        </form>
+
+        <br><br>
+
         <thead class="table-dark">
             <tr>
                 <th>Posição</th>
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Quantidade de Títulos</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -32,6 +42,7 @@
                 <td><?php echo $linha->id_time ?></td>
                 <td><?php echo $linha->nome ?></td>
                 <td><?php echo $linha->qtdTitulos ?></td>
+                <td><a href="excluir.php?id_time=<?php echo $linha->id_time ?>">Excluir</a></td>
             </tr>
             <?php endwhile; ?>
         </tbody>
