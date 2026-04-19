@@ -5,6 +5,17 @@
     $sql = " SELECT * FROM aluno";
     $consulta = $conexao->query($sql);
 
+    # Edição
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+        $sql = "SELECT * FROM aluno WHERE id = :id";
+        $consultaUp = $conexao->prepare($sql);
+        $consultaUp->bindParam(':id', $id);
+        $consultaUp->execute();
+        $aluno = $consultaUp->fetch(PDO::FETCH_OBJ);
+    }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -15,13 +26,14 @@
     <title>AlunosLouquinhos</title>
 </head>
 <body>
-    <h1>Louquinhos esses alunos 🤪</h1>
+    <h1>Alunos</h1>
 
     <form method="get" action="inserir.php">
-        Nome: <input type="text" name="nome">
-        Idade: <input type="number" name="idade">
-        Email: <input type="email" name="email">
-        Telefone: <input type="text" name="telefone" placeholder="(11) 99999-9999">
+        <input type="hidden" name="id" value="<?php echo isset($aluno) ? $aluno -> id : "" ?>">
+        Nome: <input value="<?php echo isset($aluno) ? $aluno -> nome : "" ?>" type="text" name="nome">
+        Idade: <input value="<?php echo isset($aluno) ? $aluno -> idade : "" ?>" type="number" name="idade">
+        Email: <input value="<?php echo isset($aluno) ? $aluno -> email : "" ?>" type="email" name="email">
+        Telefone: <input value="<?php echo isset($aluno) ? $aluno -> telefone : "" ?>" type="text" name="telefone" placeholder="(11) 99999-9999">
         <input type="submit" value="Salvar">
     </form>
 
@@ -47,7 +59,9 @@
             <td><?php echo $linha->idade ?></td>
             <td><?php echo $linha->email ?></td>
             <td><?php echo $linha->telefone ?></td>
-            <td><a href="excluir.php?id=<?php echo $linha->id ?>">Excluir</a></td>
+            <td><a href="index.php?id=<?php echo $linha->id ?>">Editar</a>
+                <a href="excluir.php?id=<?php echo $linha->id ?>">Excluir</a>
+            </td>
         </tr>
 
         <?php

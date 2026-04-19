@@ -1,6 +1,7 @@
 <?php
 
-    include 'conexao.php';
+    include '../sessao.php';
+    include '../conexao.php';
 
     $nome = $_GET['nome'];
     $qtdTitulos = $_GET['qtdTitulos'];

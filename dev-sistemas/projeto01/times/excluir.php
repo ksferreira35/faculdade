@@ -1,6 +1,6 @@
 <?php
-
-    include 'conexao.php';
+    include '../sessao.php';
+    include '../conexao.php';
 
     $id_time = $_GET['id_time'];
 

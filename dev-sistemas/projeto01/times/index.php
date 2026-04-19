@@ -1,5 +1,19 @@
 <?php
-    include 'conexao.php';
+    include '../sessao.php';
+    include '../conexao.php';
+
+    $time = null;
+
+    if (isset($_GET['id_time'])) {
+        $id_time = $_GET['id_time'];
+
+        $sqlEdicao = "SELECT * FROM team WHERE id_time = :id_time";
+        $stmtEdicao = $conexao->prepare($sqlEdicao);
+        $stmtEdicao->bindParam(':id_time', $id_time);
+        $stmtEdicao->execute();
+        $time = $stmtEdicao->fetch(PDO::FETCH_OBJ);
+    }
+
     $sql = "SELECT * FROM team ORDER BY qtdTitulos DESC";
     $consulta = $conexao->query($sql);
 ?>
@@ -18,11 +32,19 @@
 
     <table class="table table-bordered table-striped">
 
-        <form method="get" action="inserir.php">
-            Nome: <input type="text" name="nome">
-            Quantidade de Títulos: <input type="number" name="qtdTitulos">
-            <input type="submit" value="Salvar">
-        </form>
+    <form action="<?php echo isset($time) ? "editar.php" : "inserir.php" ?>" method="get">
+        <input type="hidden" name="id_time" 
+               value="<?php echo isset($time) ? $time->id_time : '' ?>">
+
+        Nome: <input type="text" name="nome" 
+                     value="<?php echo isset($time) ? $time->nome : '' ?>">
+
+        Quantidade de Títulos: 
+        <input type="number" name="qtdTitulos" 
+               value="<?php echo isset($time) ? $time->qtdTitulos : '' ?>">
+
+        <input type="submit" value="Salvar">
+    </form>
 
         <br><br>
 
@@ -42,7 +64,10 @@
                 <td><?php echo $linha->id_time ?></td>
                 <td><?php echo $linha->nome ?></td>
                 <td><?php echo $linha->qtdTitulos ?></td>
-                <td><a href="excluir.php?id_time=<?php echo $linha->id_time ?>">Excluir</a></td>
+                <td>
+                    <a href="index.php?id_time=<?php echo $linha->id_time ?>">Editar</a> |
+                    <a href="excluir.php?id_time=<?php echo $linha->id_time ?>">Excluir</a>
+                </td>
             </tr>
             <?php endwhile; ?>
         </tbody>
