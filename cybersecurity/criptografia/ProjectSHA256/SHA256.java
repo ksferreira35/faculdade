@@ -1,4 +1,4 @@
-package cybersecurity.criptografia;
+package cybersecurity.criptografia.ProjectSHA256;
 
 import java.security.MessageDigest;
 

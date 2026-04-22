@@ -4,13 +4,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-
 public class CriptografiaROT13 {
+
 	private static String criptografar(String texto) {
 
 		String cifra = "";
 
 		for (int i = 0 ; i < texto.length() ; i++) {
+
 			int letraOriginal = texto.charAt(i);
 			int letraCifrada = letraOriginal;
 
@@ -20,10 +21,12 @@ public class CriptografiaROT13 {
 				letraCifrada = (letraOriginal - 13);
 			}
 			cifra += ((char) letraCifrada);
+
 		}
 		return cifra;
 	}
 
+	
 
 	public static void main(String[] args) {
 		// Declaração de variáveis
@@ -34,16 +37,23 @@ public class CriptografiaROT13 {
 		String cifra;
 
 		//Entrada de dados
+
 		try {
 			System.out.print("Digite um texto: ");
 			texto = leitor.readLine();
 		} catch (IOException e) {}
 
+		
+
 		// Processamento
+
 		cifra = criptografar(texto);
 		texto = criptografar(cifra);
 
+		
 		System.out.println(texto);
 		System.out.println(cifra);
+
 	}
+
 }

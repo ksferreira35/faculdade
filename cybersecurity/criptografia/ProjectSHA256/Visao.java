@@ -1,6 +1,5 @@
-package cybersecurity.criptografia;
+package cybersecurity.criptografia.ProjectSHA256;
 
-import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -45,11 +44,12 @@ public class Visao extends JFrame {
 		// Configuração do botão de calcular
 		btnCalcular.setBounds(190, 330, 100, 20);
 		add(btnCalcular);
-		btnCalcular.addActionListener((ActionEvent e) -> {
-                    try {
-                        txtResumo.setText(SHA256.calcularHash(
-                                txtTexto.getText()));
-                    } catch (Exception e2) {}
-                });
+		
+		btnCalcular.addActionListener(e -> {
+			try {
+				txtResumo.setText(SHA256.calcularHash(
+				txtTexto.getText()));	
+			} catch (Exception e2) {}
+		});
 	}
 }
