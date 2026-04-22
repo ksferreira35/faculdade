@@ -12,7 +12,7 @@ public class SHA256 {
 		String hexadecimal = "";
 		for (int i = 0; i < resumo.length; i++) {
 			String temp = Integer.toHexString(0xFF & resumo[i]);
-			if (texto.length() == 1) temp = ("0" + temp); 
+			if (temp.length() == 1) temp = "0" + temp; 
 			hexadecimal += temp;
 		}
 		
